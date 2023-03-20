@@ -19,6 +19,11 @@ jobs:
         if: steps.scan.outputs.count > 0
         run: |
           echo "${{ steps.scan.outputs.exceptions }}"
+      - name: Confirm no exceptions
+        if: steps.scan.outputs.count == 0
+        run: |
+          echo "No exceptions found!"
+          echo "${{ steps.scan.outputs.exceptions }}"
   scan_run_logs_2:
     runs-on: ubuntu-latest
     name: Scan repo run logs 2
