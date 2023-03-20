@@ -115,8 +115,8 @@ echo "$json_out"
 json_out="${json_out//'%'/'%25'}"
 json_out="${json_out//$'\n'/'%0A'}"
 json_out="${json_out//$'\r'/'%0D'}"
-echo "::set-output name=exceptions::$json_out"
-echo "::set-output name=count::$json_out_length"
+echo "exceptions=$json_out" >> $GITHUB_OUTPUT
+echo "count=$json_out_length" >> $GITHUB_OUTPUT
 
 rm "$log_file"
 
