@@ -33,7 +33,7 @@ jobs:
         with:
           repository: ${{ secrets.SCAN_REPO }}
       - name: Scan run logs
-        uses: josiahsiegel/runleaks@v1
+        uses: josiahsiegel/runleaks@ca8ed710cdf5674de6072fb279ae94e4f444d08d
         id: scan
         with:
           github-token: ${{ secrets.MY_TOKEN }}
@@ -54,7 +54,7 @@ jobs:
         with:
           repository: ${{ secrets.SCAN_REPO }}
       - name: Scan run logs
-        uses: josiahsiegel/runleaks@v1
+        uses: josiahsiegel/runleaks@ca8ed710cdf5674de6072fb279ae94e4f444d08d
         id: scan
         with:
           github-token: ${{ secrets.MY_TOKEN }}
