@@ -14,53 +14,36 @@ jobs:
         id: scan
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-limit: 5
           fail-on-leak: false
       - name: Get scan exceptions
         if: steps.scan.outputs.count > 0
-        run: |
-          echo "${{ steps.scan.outputs.exceptions }}"
+        run: | 
+          echo "count=${{ steps.scan.outputs.count }}"
+          exceptions='${{ steps.scan.outputs.exceptions }}'
+          echo ${exceptions//"%0A"/} | jq '.'
       - name: Confirm no exceptions
         if: steps.scan.outputs.count == 0
         run: |
           echo "No exceptions found!"
-          echo "${{ steps.scan.outputs.exceptions }}"
   scan_run_logs_2:
     runs-on: ubuntu-latest
     name: Scan repo run logs 2
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          repository: ${{ secrets.SCAN_REPO }}
       - name: Scan run logs
-        uses: josiahsiegel/runleaks@cc2b305b0d8d0c1c2c2e6c5f018d2a72ad49350a
+        uses: ./
         id: scan
         with:
-          github-token: ${{ secrets.MY_TOKEN }}
-          repo:  ${{ secrets.SCAN_REPO }}
-          patterns-path: ".github/runleaks/patterns.txt"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-limit: 5
+          patterns-path: ".github/runleaks/patterns_force_failure.txt"
           exclusions-path: ".github/runleaks/exclusions.txt"
           fail-on-leak: false
       - name: Get scan exceptions
         if: steps.scan.outputs.count > 0
-        run: |
-          echo "${{ steps.scan.outputs.exceptions }}"
-  scan_run_logs_3:
-    runs-on: ubuntu-latest
-    name: Scan repo run logs 3
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          repository: ${{ secrets.SCAN_REPO }}
-      - name: Scan run logs
-        uses: josiahsiegel/runleaks@cc2b305b0d8d0c1c2c2e6c5f018d2a72ad49350a
-        id: scan
-        with:
-          github-token: ${{ secrets.MY_TOKEN }}
-          repo:  ${{ secrets.SCAN_REPO }}
-          run-limit: 50
-          min-days-old: 0
-          max-days-old: 2
-          exclusions-path: ".github/runleaks/exclusions.txt"
-          fail-on-leak: true
+        run: | 
+          echo "count=${{ steps.scan.outputs.count }}"
+          exceptions='${{ steps.scan.outputs.exceptions }}'
+          echo ${exceptions//"%0A"/} | jq '.'
