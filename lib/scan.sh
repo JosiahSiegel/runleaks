@@ -90,7 +90,7 @@ run_for_each() {
   # If exception, add to array of details
   if (($status != 0)); then
     raw_log_full=$(echo "$scan_out" | grep '(standard input)')
-    exception_line=$(echo "$raw_log_full" | awk -F '\t' '{print $1$2}' | sed 's/[^a-zA-Z0-9]/_/g' | sed 's/.*/"&",/')
+    exception_line=$(echo "$raw_log_full" | awk -F '\t' '{print $2$3}' | sed 's/[^a-zA-Z0-9]/_/g' | sed 's/.*/"&",/')
     exception=$(gh run view $each --repo "$repo" --json name,createdAt,databaseId,url,updatedAt,headBranch 2>/dev/null)
     if [[ $? -ne 0 ]]; then
       exit 1

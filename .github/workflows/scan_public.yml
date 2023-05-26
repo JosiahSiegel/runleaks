@@ -57,5 +57,5 @@ jobs:
           run-limit: 100
           min-days-old: 1
           max-days-old: 3
-          exclusions-path: ".runleaks/exclusions.txt"
+          exclusions-path: ".github/runleaks/exclusions.txt"
           fail-on-leak: true
