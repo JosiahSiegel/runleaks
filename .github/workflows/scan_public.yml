@@ -25,7 +25,7 @@ jobs:
 
       - name: Fetch random repo name
         if: github.event_name == 'schedule' || github.event_name == 'push'
-        uses: JosiahSiegel/randomrepo@v1
+        uses: JosiahSiegel/randomrepo@v1.1
         id: random
         with:
           github-token: ${{ secrets.MY_TOKEN }}
