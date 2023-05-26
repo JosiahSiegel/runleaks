@@ -9,7 +9,7 @@ on:
         default: '[\"josiahsiegel\/runleaks\",\"josiahsiegel\/AzViz-action\"]'
         type: string
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: "0 3 * * *"
   push:
 
 jobs:
