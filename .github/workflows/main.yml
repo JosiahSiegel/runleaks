@@ -8,7 +8,7 @@ jobs:
     name: Scan repo run logs 1
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Scan run logs
         uses: ./
         id: scan
@@ -31,7 +31,7 @@ jobs:
     name: Scan repo run logs 2
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Scan run logs
         uses: ./
         id: scan
